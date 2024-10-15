@@ -44,7 +44,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-r bg-cover bg-center from-blue-400 to-blue-600" style={{
-      backgroundImage: "url('http://localhost:3000/images/hero-03.webp')",
+      backgroundImage: `url(${process.env.REACT_APP_API_URL}/images/hero-03.webp)`,
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }}>
