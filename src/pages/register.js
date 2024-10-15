@@ -5,18 +5,19 @@ import { useHistory } from 'react-router-dom';
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('USER');
+  const [role, setRole] = useState('');
+  const [name, setName] = useState('');
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/users/register', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password, role }),
+        body: JSON.stringify({ email, password, name, role }),
       });
 
       if (response.ok) {
@@ -57,6 +58,18 @@ const Register = () => {
             className="w-full px-3 py-2 border rounded"
             required
           />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="role" className="block mb-2">Name</label>
+          <select
+            id="role"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="w-full px-3 py-2 border rounded"
+          >
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+          </select>
         </div>
         <div className="mb-4">
           <label htmlFor="role" className="block mb-2">Role</label>

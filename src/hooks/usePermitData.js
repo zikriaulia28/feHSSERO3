@@ -10,7 +10,7 @@ const usePermitData = () => {
     try {
       await updatePermitStatus(id, status);
       // Mengupdate data setelah status diperbarui
-      toast.success('Permit Di Accept!', { position: 'top-right' }); // Toast sukses
+      toast.success(`Permit ${status}!`, { position: 'top-right' }); // Toast sukses
       mutate();
     } catch (error) {
       console.error('Error updating status:', error);
