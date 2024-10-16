@@ -14,7 +14,7 @@ const PermitTable = ({ permitData, handleUpdateStatus, isAdmin, mutate }) => {
 
   return (
     <>
-      <table className="min-w-full border border-gray-300 shadow-lg rounded-lg mt-4">
+      <table className="border border-gray-300 shadow-lg rounded-lg mt-4">
         {/* Header tabel */}
         <thead>
           <tr className="bg-green-600 text-white text-[10px] text-nowrap font-bold uppercase leading-normal">

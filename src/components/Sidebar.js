@@ -19,7 +19,7 @@ const Sidebar = () => {
     <div className="hidden md:block">
       {/* Tombol burger untuk desktop */}
       <div
-        className="fixed top-4 left-0 z-40 p-2 text-gray-900 text-lg cursor-pointer border rounded-r-lg bg-gray-200"
+        className="sticky top-4 left-0 z-40 p-2 text-gray-900 text-lg cursor-pointer border rounded-r-lg bg-gray-200"
         onClick={toggleSidebar}
       >
         <FontAwesomeIcon icon={faBars} />

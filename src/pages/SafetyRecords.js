@@ -33,7 +33,7 @@ const SafetyRecords = () => {
     <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
       <Navbar toggleSidebar={toggleSidebar} />
       <div className="flex flex-grow">
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        {/* <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> */}
         <div className="m-4 p-6 border rounded-xl bg-white shadow-md flex-grow">
           <h1 className="text-2xl font-semibold mb-4">Data Rekaman Safety</h1>
           {/* Button untuk membuka modal Tambah Record */}

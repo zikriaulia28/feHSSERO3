@@ -27,7 +27,7 @@ const Modal = ({ children, onClose }) => {
       className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50 transition-opacity duration-300 ease-in-out"
       onClick={handleOverlayClick}
     >
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl mx-4 my-8 relative transition-transform transform duration-300 ease-in-out scale-100">
+      <div className=" bg-white rounded-lg shadow-lg p-6 w-full md:w-fit max-w-4xl mx-4 my-8 relative transition-transform transform duration-300 ease-in-out scale-100">
         {/* Content of the modal */}
         {children}
 

@@ -7,7 +7,9 @@ import FormPermitDriving from '../components/FormPermitDriving';
 import Modal from '../components/Modal';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import Cookies from 'js-cookie'; // Menggunakan js-cookie untuk mengakses token dari cookies
+import Cookies from 'js-cookie';
+import Wrapper from '../utils/wrapper'
+import MainLayout from '../components/MainLayout';
 
 const PermitDriving = () => {
   useEffect(() => {
@@ -41,47 +43,63 @@ const PermitDriving = () => {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
-      <Navbar toggleSidebar={toggleSidebar} />
-      <div className="flex flex-grow">
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="m-4 p-6 border rounded-xl bg-white shadow-md flex-grow">
-          <h1 className="text-2xl font-semibold mb-4">Data Penggunaan Kendaraan</h1>
-          <div>
-            {/* Modal untuk Membuat Permit */}
-            {isModalOpen && (
-              <Modal onClose={handleCloseModal}>
-                <FormPermitDriving onClose={handleCloseModal} mutate={mutate} />
-              </Modal>
-            )}
-
-            {/* Modal untuk Menutup Permit */}
-            {isCloseModalOpen && selectedPermitId && (
-              <Modal onClose={handleCloseCloseModal}>
-                <FormClosePermit
-                  permitId={selectedPermitId}
-                  onClose={handleCloseCloseModal}
-                  mutate={mutate}
-                />
-              </Modal>
-            )}
-
-            {/* Tabel Data Permit */}
-            <div className="overflow-x-auto max-w-screen-xl">
-              {permitError ? (
-                <PermitTable permitData={permitData} handleUpdateStatus={handleUpdateStatus} isAdmin={isAdmin} />
-              ) : !permitData ? (
-                <div>Loading...</div>
-              ) : permitData.length === 0 ? (
-                <div>No permit data available</div>
-              ) : (
-                <PermitTable permitData={permitData} handleUpdateStatus={handleUpdateStatus} isAdmin={isAdmin} />
-              )}
-            </div>
-          </div>
-        </div>
+    <MainLayout titlePage='Data Penggunaan Kendaraan' isLogedin={true}>
+      {/* Tabel Data Permit */}
+      <div className="overflow-x-scroll">
+        {permitError ? (
+          <PermitTable permitData={permitData} handleUpdateStatus={handleUpdateStatus} isAdmin={isAdmin} />
+        ) : !permitData ? (
+          <div>Loading...</div>
+        ) : permitData.length === 0 ? (
+          <div>No permit data available</div>
+        ) : (
+          <PermitTable permitData={permitData} handleUpdateStatus={handleUpdateStatus} isAdmin={isAdmin} />
+        )}
       </div>
-    </div>
+    </MainLayout>
+    // <div className="flex flex-col bg-gray-50 text-gray-800">
+    //   <Navbar toggleSidebar={toggleSidebar} />
+    //   <Wrapper>
+    //     <div className="min-h-screen flex overflow-hidden">
+    //       {/* <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> */}
+    //       <div className="w-full m-4 p-6 border rounded-xl bg-white shadow-md flex-grow">
+    //         <h1 className="text-2xl font-semibold mb-4">Data Penggunaan Kendaraan</h1>
+    //         <div>
+    //           {/* Modal untuk Membuat Permit */}
+    //           {isModalOpen && (
+    //             <Modal onClose={handleCloseModal}>
+    //               <FormPermitDriving onClose={handleCloseModal} mutate={mutate} />
+    //             </Modal>
+    //           )}
+
+    //           {/* Modal untuk Menutup Permit */}
+    //           {isCloseModalOpen && selectedPermitId && (
+    //             <Modal onClose={handleCloseCloseModal}>
+    //               <FormClosePermit
+    //                 permitId={selectedPermitId}
+    //                 onClose={handleCloseCloseModal}
+    //                 mutate={mutate}
+    //               />
+    //             </Modal>
+    //           )}
+
+    // {/* Tabel Data Permit */}
+    // <div className="overflow-x-scroll">
+    //   {permitError ? (
+    //     <PermitTable permitData={permitData} handleUpdateStatus={handleUpdateStatus} isAdmin={isAdmin} />
+    //   ) : !permitData ? (
+    //     <div>Loading...</div>
+    //   ) : permitData.length === 0 ? (
+    //     <div>No permit data available</div>
+    //   ) : (
+    //     <PermitTable permitData={permitData} handleUpdateStatus={handleUpdateStatus} isAdmin={isAdmin} />
+    //   )}
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </Wrapper>
+    // </div>
   );
 };
 

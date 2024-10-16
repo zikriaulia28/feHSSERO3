@@ -4,7 +4,7 @@ import React from 'react';
 
 const CarTable = ({ carData }) => {
   return (
-    <table className="min-w-full border border-gray-300 shadow-lg rounded-lg overflow-hidden mt-4">
+    <table className="w-fit md:w-full border border-gray-300 shadow-lg rounded-lg overflow-hidden mt-4">
       <thead>
         <tr className="bg-orange-600 text-white text-sm font-bold uppercase leading-normal">
           <th className="border border-gray-300 px-4 py-2">No</th>

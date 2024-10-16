@@ -23,42 +23,6 @@ const FormClosePermit = ({ permitId, kmAwal, onClose, mutate }) => {
     setIfError(false)
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setError(''); // Reset error message
-
-  //   // Validasi kmAkhir tidak boleh lebih kecil dari kmAwal
-  //   if (Number(formData.kmAkhir) < Number(kmAwal)) {
-  //     setError(`KM Akhir tidak boleh lebih kecil dari KM Keluar (${kmAwal})`);
-  //     return; // Hentikan eksekusi jika validasi gagal
-  //   }
-
-  //   // Validasi jamMasuk tidak boleh kosong
-  //   if (!formData.jamMasuk) {
-  //     setError("Jam Masuk tidak boleh kosong.");
-  //     return; // Hentikan eksekusi jika validasi gagal
-  //   }
-
-  //   try {
-  //     // Step 1: Update status permit dan KM Akhir, Jam Masuk, Fuel Level
-  //     await axios.put(`http://localhost:3001/permitDriving/${permitId}/status`, {
-  //       kmAkhir: formData.kmAkhir,
-  //       jamMasuk: formData.jamMasuk,
-  //       fuelLevel: formData.fuelLevel,
-  //       status: 'completed', // Status setelah permit ditutup
-  //     });
-  //     toast.success('Permit Behasil Di Tutup!', { position: 'top-right' }); // Toast sukses
-  //     // Step 2: Call mutate untuk mendapatkan data terbaru
-  //     await mutate();
-
-  //     // Close the modal after successful submission
-  //     onClose();
-  //   } catch (error) {
-  //     console.error('Error closing permit:', error);
-  //     toast.error('Permit Gagal Di Tutup!', { position: 'top-right' });
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(''); // Reset error message
@@ -109,7 +73,7 @@ const FormClosePermit = ({ permitId, kmAwal, onClose, mutate }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-50">
-      <div className="bg-white p-6 rounded shadow-lg w-full">
+      <div className="bg-white p-6 rounded shadow-lg w-fit">
         <h2 className="text-lg font-bold text-center">Tutup Permit</h2>
         {error && <p className="text-red-500">{error}</p>}
         <form onSubmit={handleSubmit}>

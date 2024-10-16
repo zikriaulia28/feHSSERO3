@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faSignOutAlt, faBars, faTimes, faChartLine, faIdBadge, faCarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import Sidebar from './Sidebar';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,10 +28,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-400 to-indigo-500 p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="bg-gradient-to-r from-blue-400 to-indigo-500 p-2 shadow-md">
+      <div className="flex justify-between items-center">
         {/* Logo Section */}
         <div className="flex items-center gap-4">
+          <Sidebar />
           <div className="w-12 h-12">
             <img
               src="/images/logo-tgi.webp"

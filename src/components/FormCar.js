@@ -37,7 +37,7 @@ const FormCar = ({ onClose, mutate }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 p-6 bg-white rounded-lg shadow-md">
+    <form onSubmit={handleSubmit} className="w-fit space-y-6 p-6 bg-white rounded-lg">
       <div className='text-center text-2xl font-bold text-blue-600'>Tambah Data Mobil</div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
