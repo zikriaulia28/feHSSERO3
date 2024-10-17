@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import useCarData from '../hooks/useCarData'; // Assuming you have a hook for fetching car data
-import CarTable from '../components/CarsTable';
-import FormCar from '../components/FormCar'; // Assuming you have a form component for adding cars
-import Modal from '../components/Modal';
-import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
-import MainLayout from '../components/MainLayout';
+import React, { useState, useEffect } from "react";
+import useCarData from "../hooks/useCarData"; // Assuming you have a hook for fetching car data
+import CarTable from "../components/CarsTable";
+import FormCar from "../components/FormCar"; // Assuming you have a form component for adding cars
+import Modal from "../components/Modal";
+import MainLayout from "../components/MainLayout";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import Navbar from "../components/Navbar";
+// import Sidebar from "../components/Sidebar";
 
 const Cars = () => {
   useEffect(() => {
-    document.title = 'Cars - HSSE TGI RO 3';
+    document.title = "Cars - HSSE TGI RO 3";
   }, []);
   const { carData, carError, mutate } = useCarData(); // Fetch car data
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
 
-  console.log("cek car : ", carData)
+  console.log("cek car : ", carData);
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -25,13 +27,14 @@ const Cars = () => {
   // if (!carData) return <div className="text-center py-4">Loading...</div>;
 
   return (
-    <MainLayout titlePage='Data Kendaraan' isLogedin={true}>
+    <MainLayout titlePage="Data Kendaraan" isLogedin={true}>
       {/* Button to add new car */}
       <button
         onClick={handleOpenModal}
-        className="w-fit bg-blue-500 mb-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200"
+        className="w-fit flex items-center gap-2 bg-blue-500 mb-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200"
       >
-        Tambah Data Mobil
+        <h2>Tambah Data Mobil</h2>
+        <FontAwesomeIcon icon={faPlus} />
       </button>
 
       <div className="overflow-x-auto">
@@ -40,12 +43,13 @@ const Cars = () => {
         ) : !carData ? (
           <div>Loading...</div>
         ) : carData.length === 0 ? (
-          <div className="text-gray-500">Tidak ada data mobil yang tersedia</div>
+          <div className="text-gray-500">
+            Tidak ada data mobil yang tersedia
+          </div>
         ) : (
           <CarTable carData={carData} />
         )}
       </div>
-
 
       {/* Modal */}
       {isModalOpen && (
@@ -56,7 +60,6 @@ const Cars = () => {
       {/* <div className="overflow-x-auto">
         <CarTable carData={carData} />
       </div> */}
-
     </MainLayout>
     // <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
     //   {/* Navbar */}

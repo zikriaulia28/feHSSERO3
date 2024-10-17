@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 const Modal = ({ children, onClose }) => {
-
   // Close modal when pressing the Escape key
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         onClose();
       }
     };
-    document.addEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
     return () => {
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, [onClose]);
 
@@ -27,7 +26,7 @@ const Modal = ({ children, onClose }) => {
       className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50 transition-opacity duration-300 ease-in-out"
       onClick={handleOverlayClick}
     >
-      <div className=" bg-white rounded-lg shadow-lg p-6 w-full md:w-fit max-w-4xl mx-4 my-8 relative transition-transform transform duration-300 ease-in-out scale-100">
+      <div className="relative bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl mx-4 my-8 md:my-12 overflow-y-auto max-h-screen">
         {/* Content of the modal */}
         {children}
 

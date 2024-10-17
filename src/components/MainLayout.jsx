@@ -85,7 +85,7 @@ function MainLayout({ children, titlePage = "HOME", isLogedin = false }) {
       <div className="w-full flex-1 flex">
         {/* SIDE MENU */}
         <div
-          className={`w-full md:w-fit flex flex-col p-2 bg-[#EAE4DD] gap-1 absolute md:static top-16 ${
+          className={`w-full md:w-fit flex flex-col p-2 bg-[#EEF7FF] gap-1 absolute md:static top-16 ${
             isShowMenu ? "left-0" : "-left-full"
           } transition-all duration-300`}
         >
@@ -101,24 +101,43 @@ function MainLayout({ children, titlePage = "HOME", isLogedin = false }) {
             <>
               <Link
                 to="/permit-driving"
+                title="Permit Driving"
                 className="flex items-center gap-2 bg-green-500 text-white px-4 py-3 rounded-lg hover:bg-green-600 transition duration-200"
               >
                 <FontAwesomeIcon icon={faClipboardCheck} />
                 {isShowMenu && <span>Permit Driving</span>}
               </Link>
-              <Link
+              {/* <Link
                 to="/cars"
+                title="Dashboard"
                 className="flex items-center gap-2 bg-orange-500 text-white px-4 py-3 rounded-lg hover:bg-orange-600 transition duration-200"
               >
                 <FontAwesomeIcon icon={faCar} />
                 {isShowMenu && <span>Data Cars</span>}
+              </Link> */}
+              <Link
+                to="/managementUsers"
+                title="Management Users"
+                className="flex items-center gap-2 bg-[#EE66A6] text-white px-4 py-3 rounded-lg hover:bg-[#D91656] transition duration-200"
+              >
+                <FontAwesomeIcon icon={faClipboardCheck} />
+                {isShowMenu && <span>Management Users</span>}
               </Link>
               <Link
                 to="/safeManHours"
+                title="Safe Man Hours"
                 className="flex items-center gap-2 bg-purple-500 text-white px-4 py-3 rounded-lg hover:bg-purple-600 transition duration-200"
               >
                 <FontAwesomeIcon icon={faClipboardCheck} />
                 {isShowMenu && <span>Safe Man Hours</span>}
+              </Link>
+              <Link
+                to="/usaOrUsc"
+                title="USA Or USC"
+                className="flex items-center gap-2 bg-[#dfd991] text-white px-4 py-3 rounded-lg hover:bg-[#FFC700] transition duration-200"
+              >
+                <FontAwesomeIcon icon={faClipboardCheck} />
+                {isShowMenu && <span>USA OR USC</span>}
               </Link>
             </>
           )}

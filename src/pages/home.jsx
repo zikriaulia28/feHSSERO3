@@ -54,7 +54,7 @@ const Home = () => {
 
   const fetcher = (url) => axios.get(url).then(res => res.data);
 
-  const { data: totalUsageData, error: usageError } = useSWR(
+  const { data: totalUsageData, error: usageError, } = useSWR(
     `${process.env.REACT_APP_API_URL}/permitDriving/usage?year=${year}&month=${month}`,
     fetcher
   );
@@ -64,6 +64,7 @@ const Home = () => {
       // Mengambil totalKmUsed dari totalUsageData
       const totalKmUsed = totalUsageData.totalUsageLogs.reduce((acc, log) => acc + log.totalKmUsed, 0); // Mengambil totalKmUsed dari setiap log
       setTotalKm(totalKmUsed); // Memperbarui state totalKm dengan totalKmUsed
+      mutate()
     }
   }, [totalUsageData]);
 
@@ -85,7 +86,7 @@ const Home = () => {
 
   return (
     <MainLayout titlePage='' isLogedin={true}>
-      <h1 className="text-3xl font-semibold mb-4 text-blue-600">Total Penggunaan Kendaraan Bulan {month ? month : ""} {year ? year : ""} : {totalKm || 0} KM</h1>
+      <h1 className="text-3xl font-semibold mb-4 text-blue-600">Total Penggunaan Kendaraan Bulan Ini : {totalKm || 0} KM</h1>
       {/* Filter Inputs */}
       <div className="flex items-center space-x-4 mb-6">
         <div className="relative">
@@ -169,11 +170,11 @@ const Home = () => {
           <div className="bg-white p-4 rounded-lg shadow-lg">
             <Bar
               data={{
-                labels: totalUsageData.totalUsageLogs.map(item => item.car.nopol),
+                labels: totalUsageData?.totalUsageLogs.map(item => item.car.nopol),
                 datasets: [{
                   label: 'Total KM',
-                  data: totalUsageData.totalUsageLogs.map(item => item.totalKmUsed), // Ganti kmUsed dengan totalKmUsed
-                  backgroundColor: totalUsageData.totalUsageLogs.map((item, index) => {
+                  data: totalUsageData?.totalUsageLogs.map(item => item.totalKmUsed),
+                  backgroundColor: totalUsageData?.totalUsageLogs.map((item, index) => {
                     const colors = [
                       'rgba(75, 192, 192, 0.6)', // Warna 1
                       'rgba(255, 99, 132, 0.6)', // Warna 2
