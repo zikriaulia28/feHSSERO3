@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const FormCar = ({ onClose, mutate }) => {
   const [formData, setFormData] = useState({
-    nopol: '',
-    model: '',
+    nopol: "",
+    model: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -21,27 +21,37 @@ const FormCar = ({ onClose, mutate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/cars`, formData);
-      console.log('Response:', response);
-      toast.success('Mobil berhasil ditambahkan!', {
-        position: 'top-right', // Gunakan string untuk posisi
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/cars`,
+        formData
+      );
+      console.log("Response:", response);
+      toast.success("Mobil berhasil ditambahkan!", {
+        position: "top-right", // Gunakan string untuk posisi
       });
       mutate(); // Memperbarui data mobil
       onClose(); // Menutup modal setelah mengirim
     } catch (error) {
-      console.error('Error adding car:', error);
-      toast.error('Gagal menambahkan mobil. Silakan coba lagi.', {
-        position: 'top-right', // Gunakan string untuk posisi
+      console.error("Error adding car:", error);
+      toast.error("Gagal menambahkan mobil. Silakan coba lagi.", {
+        position: "top-right", // Gunakan string untuk posisi
       });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-fit space-y-6 p-6 bg-white rounded-lg">
-      <div className='text-center text-2xl font-bold text-blue-600'>Tambah Data Mobil</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <form
+      onSubmit={handleSubmit}
+      className="w-fit space-y-6 p-6 bg-white rounded-lg"
+    >
+      <div className="text-center text-2xl font-bold text-blue-600">
+        Tambah Data Mobil
+      </div>
+      <div className="grid grid-cols-1 gap-4">
         <div>
-          <label htmlFor="nopol" className="block text-gray-700 font-semibold">Nomor Polisi</label>
+          <label htmlFor="nopol" className="block text-gray-700 font-semibold">
+            Nomor Polisi
+          </label>
           <input
             type="text"
             id="nopol"
@@ -54,7 +64,9 @@ const FormCar = ({ onClose, mutate }) => {
           />
         </div>
         <div>
-          <label htmlFor="model" className="block text-gray-700 font-semibold">Model Mobil</label>
+          <label htmlFor="model" className="block text-gray-700 font-semibold">
+            Model Mobil
+          </label>
           <input
             type="text"
             id="model"
@@ -78,10 +90,12 @@ const FormCar = ({ onClose, mutate }) => {
         </button>
         <button
           type="submit"
-          className={`bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-200 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-200 ${
+            loading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
           disabled={loading}
         >
-          {loading ? 'Menambahkan...' : 'Tambah Mobil'}
+          {loading ? "Menambahkan..." : "Tambah Mobil"}
         </button>
       </div>
     </form>

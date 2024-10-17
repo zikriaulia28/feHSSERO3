@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import FormFindingUsaUsc from "./FormFindingUsaUsc"; // Import the form component
 
 const FindingTable = () => {
@@ -112,7 +115,7 @@ const FindingTable = () => {
                     </td>
                     <td className="px-4 py-2">
                       <img
-                        src={temuan.fotoClosing ? temuan.fotoClosing : ""}
+                        src={temuan.fotoClosing}
                         className="h-16 w-16 object-cover"
                       />
                     </td>
@@ -123,15 +126,15 @@ const FindingTable = () => {
                     <td className="py-10 flex">
                       <button
                         onClick={() => handleEdit(temuan)}
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded mr-2"
+                        className="text-green-500 p-2 hover:text-green-700 transition duration-200"
                       >
-                        Edit
+                        <FontAwesomeIcon icon={faPen} />
                       </button>
                       <button
                         onClick={() => handleDelete(temuan.id)}
-                        className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"
+                        className="text-red-500 p-2 hover:text-red-700 transition duration-200"
                       >
-                        Delete
+                        <FontAwesomeIcon icon={faTrash} />
                       </button>
                     </td>
                   </tr>

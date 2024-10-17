@@ -10,12 +10,6 @@ import MainLayout from "../components/MainLayout";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "../components/Modal";
-// import FormClosePermit from '../components/FormClosePermit';
-// import FormPermitDriving from '../components/FormPermitDriving';
-// import Modal from '../components/Modal';
-// import Navbar from '../components/Navbar';
-// import Sidebar from '../components/Sidebar';
-// import Wrapper from '../utils/wrapper'
 
 const PermitDriving = () => {
   useEffect(() => {
@@ -27,34 +21,12 @@ const PermitDriving = () => {
   const { permitData, permitError, handleUpdateStatus } = usePermitData();
   const { carData, carError, mutate } = useCarData(); // Fetch car data
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
-
-  // console.log("cek car : ", carData);
-
-  // const handleOpenModal = () => setIsModalOpen(true);
-  // const handleCloseModal = () => setIsModalOpen(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Status sidebar
 
   // Handle buka dan tutup modal Buat Permit
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
   const role = Cookies.get("role");
-
   const isAdmin = role === "admin";
-
-  // Handle buka dan tutup modal Tutup Permit
-  // const handleOpenCloseModal = (permitId) => {
-  //   setSelectedPermitId(permitId);
-  //   setIsCloseModalOpen(true);
-  // };
-
-  // const handleCloseCloseModal = () => {
-  //   setIsCloseModalOpen(false);
-  //   setSelectedPermitId(null);
-  // };
-
-  // Fungsi untuk toggle sidebar
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
     <MainLayout titlePage="Data Penggunaan Kendaraan" isLogedin={true}>
@@ -104,7 +76,7 @@ const PermitDriving = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <Modal onClose={handleCloseModal}>
+        <Modal onClose={handleCloseModal} isFormCar={true}>
           <FormCar onClose={handleCloseModal} mutate={mutate} />
         </Modal>
       )}

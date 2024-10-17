@@ -13,18 +13,9 @@ const UsaOrUsc = () => {
   useEffect(() => {
     document.title = "USA OR USC - HSSE TGI RO 3";
   }, []);
-  // const { carData, carError, mutate } = useCarData(); // Fetch car data
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
-
-  // console.log("cek car : ", carData);
-
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Toggle sidebar function
-
-  // if (carError) return <div className="text-red-500">Error loading data...</div>;
-  // if (!carData) return <div className="text-center py-4">Loading...</div>;
 
   return (
     <MainLayout
@@ -39,20 +30,6 @@ const UsaOrUsc = () => {
         <h2>Add Finding</h2>
         <FontAwesomeIcon icon={faPlus} />
       </button>
-
-      {/* <div className="overflow-x-auto">
-        {carError ? (
-          <div className="text-red-500 font-bold">Error fetching car data</div>
-        ) : !carData ? (
-          <div>Loading...</div>
-        ) : carData.length === 0 ? (
-          <div className="text-gray-500">
-            Tidak ada data mobil yang tersedia
-          </div>
-        ) : (
-          <CarTable carData={carData} />
-        )}
-      </div> */}
 
       {/* Modal */}
       {isModalOpen && (

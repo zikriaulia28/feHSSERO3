@@ -1,5 +1,4 @@
 import {
-  faCar,
   faChartLine,
   faClipboardCheck,
   faBars,
@@ -40,21 +39,21 @@ function MainLayout({ children, titlePage = "HOME", isLogedin = false }) {
   return (
     <div className="w-full h-screen flex flex-col">
       {/* Header */}
-      <header className="w-full flex-1 flex gap-4 p-2 bg-[#0D92F4]">
+      <header className="w-full flex-1 flex items-center md:gap-4 p-2 bg-[#0D92F4]">
         <button
           onClick={toggleMenu}
           className="border rounded-r-lg  px-2 bg-gray-200"
         >
           <FontAwesomeIcon icon={faBars} />
         </button>
-        <div className="w-12 h-12">
+        <div className="w-8 h-8 md:w-12 md:h-12">
           <img
             src="/images/logo-tgi.webp"
             alt="Logo"
             className="w-full h-full object-contain"
           />
         </div>
-        <div className="text-white text-2xl sm:text-3xl font-bold">
+        <div className="text-white text-sm text md:text-3xl font-bold">
           HSSE TGI RO 3
         </div>
         <div className="flex gap-4 ml-auto">
@@ -63,24 +62,24 @@ function MainLayout({ children, titlePage = "HOME", isLogedin = false }) {
           ))} */}
           <div className="flex items-center text-white gap-2 text-lg">
             <FontAwesomeIcon icon={faUser} />
-            <span className="hidden sm:inline">Hi! {isName}</span>
+            <span className="hidden sm:inline">Hi {isName}!</span>
           </div>
+          {isLogedin ? (
+            <button
+              href="/"
+              onClick={(e) => {
+                e.preventDefault(); // Mencegah perilaku default tautan
+                handleLogout(); // Panggil fungsi handleLogout
+              }}
+              className="flex items-center text-white hover:text-gray-300 gap-2 transition-colors duration-200"
+            >
+              <FontAwesomeIcon icon={faSignOutAlt} />
+              <span>Logout</span>
+            </button>
+          ) : (
+            <button>Login</button>
+          )}
         </div>
-        {isLogedin ? (
-          <button
-            href="/"
-            onClick={(e) => {
-              e.preventDefault(); // Mencegah perilaku default tautan
-              handleLogout(); // Panggil fungsi handleLogout
-            }}
-            className="flex items-center text-white hover:text-gray-300 gap-2 transition-colors duration-200"
-          >
-            <FontAwesomeIcon icon={faSignOutAlt} />
-            <span>Logout</span>
-          </button>
-        ) : (
-          <button>Login</button>
-        )}
       </header>
       <div className="w-full flex-1 flex">
         {/* SIDE MENU */}
@@ -107,14 +106,6 @@ function MainLayout({ children, titlePage = "HOME", isLogedin = false }) {
                 <FontAwesomeIcon icon={faClipboardCheck} />
                 {isShowMenu && <span>Permit Driving</span>}
               </Link>
-              {/* <Link
-                to="/cars"
-                title="Dashboard"
-                className="flex items-center gap-2 bg-orange-500 text-white px-4 py-3 rounded-lg hover:bg-orange-600 transition duration-200"
-              >
-                <FontAwesomeIcon icon={faCar} />
-                {isShowMenu && <span>Data Cars</span>}
-              </Link> */}
               <Link
                 to="/managementUsers"
                 title="Management Users"
