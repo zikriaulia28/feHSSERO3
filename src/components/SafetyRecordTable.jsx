@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const SafetyRecordTable = ({ records, onEdit, onDelete }) => {
+const SafetyRecordTable = ({ records, onEdit, onDelete, isAdmin }) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full shadow-lg rounded-lg overflow-hidden">
@@ -23,7 +23,7 @@ const SafetyRecordTable = ({ records, onEdit, onDelete }) => {
             <th className="p-2">Total Sickness Absence (Maks 0.45)</th>
             <th className="p-2">Environment Pollution</th>
             <th className="p-2">Security Incident</th>
-            <th className="p-2">Actions</th>
+            {isAdmin && <th className="p-2">Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -57,22 +57,24 @@ const SafetyRecordTable = ({ records, onEdit, onDelete }) => {
                 <td className="px-4 py-2">{record.sicknessAbsenceFrequency}</td>
                 <td className="px-4 py-2">{record.environmentPollution}</td>
                 <td className="px-4 py-2">{record.securityIncident}</td>
-                <td className="px-4 py-2">
-                  <div className="flex justify-center">
-                    <button
-                      onClick={() => onEdit(record)}
-                      className="text-green-500 p-2 hover:text-green-700 transition duration-200"
-                    >
-                      <FontAwesomeIcon icon={faPen} />
-                    </button>
-                    <button
-                      onClick={() => onDelete(record.id)}
-                      className="text-red-500 p-2 hover:text-red-700 transition duration-200"
-                    >
-                      <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                  </div>
-                </td>
+                {isAdmin && (
+                  <td className="px-4 py-2">
+                    <div className="flex justify-center">
+                      <button
+                        onClick={() => onEdit(record)}
+                        className="text-green-500 p-2 hover:text-green-700 transition duration-200"
+                      >
+                        <FontAwesomeIcon icon={faPen} />
+                      </button>
+                      <button
+                        onClick={() => onDelete(record.id)}
+                        className="text-red-500 p-2 hover:text-red-700 transition duration-200"
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  </td>
+                )}
               </tr>
             ))
           )}

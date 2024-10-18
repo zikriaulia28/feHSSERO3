@@ -52,13 +52,15 @@ const PermitDriving = () => {
       </div>
 
       {/* Button to add new car */}
-      <button
-        onClick={handleOpenModal}
-        className="mt-10 w-fit flex items-center gap-2 bg-blue-500 mb-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200"
-      >
-        <h2>Add Data Cars</h2>
-        <FontAwesomeIcon icon={faPlus} />
-      </button>
+      {isAdmin && (
+        <button
+          onClick={handleOpenModal}
+          className="mt-10 w-fit flex items-center gap-2 bg-blue-500 mb-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200"
+        >
+          <h2>Add Data Cars</h2>
+          <FontAwesomeIcon icon={faPlus} />
+        </button>
+      )}
 
       <div className="overflow-x-auto">
         {carError ? (

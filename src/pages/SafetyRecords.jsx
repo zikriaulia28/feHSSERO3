@@ -6,6 +6,7 @@ import SafetyRecordTable from "../components/SafetyRecordTable";
 import FormSafetyRecord from "../components/FormSafetyRecord";
 import Modal from "../components/Modal";
 import MainLayout from "../components/MainLayout";
+import Cookies from "js-cookie";
 
 const SafetyRecords = () => {
   useEffect(() => {
@@ -19,6 +20,8 @@ const SafetyRecords = () => {
   } = useSafetyRecords();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
+  const role = Cookies.get("role");
+  const isAdmin = role === "admin";
 
   // Handle buka dan tutup modal untuk tambah/edit safety record
   const handleOpenModal = (record = null) => {
@@ -33,13 +36,15 @@ const SafetyRecords = () => {
 
   return (
     <MainLayout titlePage="Data Safety Record" isLogedin={true}>
-      <button
-        onClick={() => handleOpenModal(null)}
-        className="w-fit flex justify-center items-center gap-2 bg-green-500 hover:bg-green-600 text-white p-2 rounded my-4"
-      >
-        <h2 className="font-bold">Tambah Safety Record</h2>
-        <FontAwesomeIcon icon={faPlus} />
-      </button>
+      {isAdmin && (
+        <button
+          onClick={() => handleOpenModal(null)}
+          className="w-fit flex justify-center items-center gap-2 bg-green-500 hover:bg-green-600 text-white p-2 rounded my-4"
+        >
+          <h2 className="font-bold">Tambah Safety Record</h2>
+          <FontAwesomeIcon icon={faPlus} />
+        </button>
+      )}
 
       {/* Tabel Data Rekaman Safety */}
       <div className="overflow-x-auto max-w-screen-xl">
@@ -56,6 +61,7 @@ const SafetyRecords = () => {
             records={safetyRecords}
             onEdit={handleOpenModal}
             onDelete={deleteSafetyRecord}
+            isAdmin={isAdmin}
           />
         )}
       </div>

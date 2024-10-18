@@ -91,47 +91,53 @@ function MainLayout({ children, titlePage = "HOME", isLogedin = false }) {
           <Link
             to="/"
             title="Dashboard"
-            className="flex items-center gap-2 bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition duration-200"
+            className="flex justify-center items-center gap-2 bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition duration-200"
           >
             <FontAwesomeIcon icon={faChartLine} />
             {isShowMenu && <span>Dashboard</span>}
           </Link>
+          <Link
+            to="/permit-driving"
+            title="Permit Driving"
+            className="flex justify-center items-center gap-2 bg-green-500 text-white px-4 py-3 rounded-lg hover:bg-green-600 transition duration-200"
+          >
+            <FontAwesomeIcon icon={faClipboardCheck} />
+            {isShowMenu && <span>Permit Driving</span>}
+          </Link>
           {isAdmin && (
-            <>
-              <Link
-                to="/permit-driving"
-                title="Permit Driving"
-                className="flex items-center gap-2 bg-green-500 text-white px-4 py-3 rounded-lg hover:bg-green-600 transition duration-200"
-              >
-                <FontAwesomeIcon icon={faClipboardCheck} />
-                {isShowMenu && <span>Permit Driving</span>}
-              </Link>
-              <Link
-                to="/managementUsers"
-                title="Management Users"
-                className="flex items-center gap-2 bg-[#EE66A6] text-white px-4 py-3 rounded-lg hover:bg-[#D91656] transition duration-200"
-              >
-                <FontAwesomeIcon icon={faClipboardCheck} />
-                {isShowMenu && <span>Management Users</span>}
-              </Link>
-              <Link
-                to="/safeManHours"
-                title="Safe Man Hours"
-                className="flex items-center gap-2 bg-purple-500 text-white px-4 py-3 rounded-lg hover:bg-purple-600 transition duration-200"
-              >
-                <FontAwesomeIcon icon={faClipboardCheck} />
-                {isShowMenu && <span>Safe Man Hours</span>}
-              </Link>
-              <Link
-                to="/usaOrUsc"
-                title="USA Or USC"
-                className="flex items-center gap-2 bg-[#dfd991] text-white px-4 py-3 rounded-lg hover:bg-[#FFC700] transition duration-200"
-              >
-                <FontAwesomeIcon icon={faClipboardCheck} />
-                {isShowMenu && <span>USA OR USC</span>}
-              </Link>
-            </>
+            <Link
+              to="/managementUsers"
+              title="Management Users"
+              className="flex justify-center items-center gap-2 bg-[#EE66A6] text-white px-4 py-3 rounded-lg hover:bg-[#D91656] transition duration-200"
+            >
+              <FontAwesomeIcon icon={faClipboardCheck} />
+              {isShowMenu && <span>Management Users</span>}
+            </Link>
           )}
+          <Link
+            to="/safeManHours"
+            title="Safe Man Hours"
+            className="flex justify-center items-center gap-2 bg-purple-500 text-white px-4 py-3 rounded-lg hover:bg-purple-600 transition duration-200"
+          >
+            <FontAwesomeIcon icon={faClipboardCheck} />
+            {isShowMenu && <span>Safe Man Hours</span>}
+          </Link>
+          <Link
+            to="/usaOrUsc"
+            title="USA Or USC"
+            className="flex justify-center items-center gap-2 bg-[#dfd991] text-white px-4 py-3 rounded-lg hover:bg-[#FFC700] transition duration-200"
+          >
+            <FontAwesomeIcon icon={faClipboardCheck} />
+            {isShowMenu && <span>USA OR USC</span>}
+          </Link>
+          <Link
+            to="/ptwLog"
+            title="Permit To Work Log"
+            className="flex justify-center items-center gap-2 bg-[#37B7C3] text-white px-4 py-3 rounded-lg hover:bg-[#088395] transition duration-200"
+          >
+            <FontAwesomeIcon icon={faClipboardCheck} />
+            {isShowMenu && <span>Permit To Work Log</span>}
+          </Link>
           {/* {Array.from({ length: 12 }).map((item, idx) => {
             return isShowMenu ? (
               <button key={idx} className="whitespace-nowrap p-2 bg-orange-300">

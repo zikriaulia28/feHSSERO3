@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-// import useCarData from "../hooks/useCarData"; // Assuming you have a hook for fetching car data
 import FormFindingUsaUsc from "../components/FormFindingUsaUsc"; // Assuming you have a form component for adding cars
 import Modal from "../components/Modal";
 import MainLayout from "../components/MainLayout";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FindingTable from "../components/FindingTable";
-// import Navbar from "../components/Navbar";
-// import Sidebar from "../components/Sidebar";
+import Cookies from "js-cookie";
 
 const UsaOrUsc = () => {
   useEffect(() => {
@@ -16,20 +14,23 @@ const UsaOrUsc = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
+  const role = Cookies.get("role");
+  const isAdmin = role === "admin";
 
   return (
     <MainLayout
       titlePage="Finding USA(Unsafe Action) And USC(Unsafe Codition)"
       isLogedin={true}
     >
-      {/* Button to add new car */}
-      <button
-        onClick={handleOpenModal}
-        className="w-fit flex items-center gap-2 bg-blue-500 mb-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200"
-      >
-        <h2>Add Finding</h2>
-        <FontAwesomeIcon icon={faPlus} />
-      </button>
+      {isAdmin && (
+        <button
+          onClick={handleOpenModal}
+          className="w-fit flex items-center gap-2 bg-blue-500 mb-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200"
+        >
+          <h2>Add Finding</h2>
+          <FontAwesomeIcon icon={faPlus} />
+        </button>
+      )}
 
       {/* Modal */}
       {isModalOpen && (
@@ -38,7 +39,7 @@ const UsaOrUsc = () => {
         </Modal>
       )}
       <div className="overflow-x-auto">
-        <FindingTable />
+        <FindingTable isAdmin={isAdmin} />
       </div>
     </MainLayout>
   );

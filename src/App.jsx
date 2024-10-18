@@ -8,6 +8,7 @@ import Register from "./pages/register"; // Halaman login
 import PrivateRoute from "./components/PrivateRoute"; // Import PrivateRoute
 import SafetyRecords from "./pages/SafetyRecords";
 import UsaOrUsc from "./pages/usaOrUsc";
+import PtwLog from "./pages/ptwLog";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         path="/permit-driving"
         element={<PrivateRoute element={<PermitDriving />} />}
       />
-      <Route path="/cars" element={<PrivateRoute element={<Cars />} />} />
+      <Route path="/ptwLog" element={<PrivateRoute element={<PtwLog />} />} />
       <Route
         path="/usaOrUsc"
         element={<PrivateRoute element={<UsaOrUsc />} />}

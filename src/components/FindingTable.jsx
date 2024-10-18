@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import FormFindingUsaUsc from "./FormFindingUsaUsc"; // Import the form component
 
-const FindingTable = () => {
+const FindingTable = ({ isAdmin }) => {
   const [data, setData] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState(null);
@@ -61,7 +61,7 @@ const FindingTable = () => {
       ) : (
         <>
           <table className="table-auto w-full ">
-            <thead className="bg-slate-100">
+            <thead className="bg-[#dfd991]">
               <tr>
                 <th className="px-4 py-2">No</th>
                 <th className="px-4 py-2">Nama</th>
@@ -79,7 +79,7 @@ const FindingTable = () => {
                 <th className="px-4 py-2">Foto Closing</th>
                 <th className="px-4 py-2">Waktu</th>
                 <th className="px-4 py-2">Status Akhir</th>
-                <th className="px-4 py-2">Aksi</th>
+                {isAdmin && <th className="px-4 py-2">Aksi</th>}
               </tr>
             </thead>
             <tbody>
@@ -91,7 +91,10 @@ const FindingTable = () => {
                 </tr>
               ) : (
                 data.map((temuan, idx) => (
-                  <tr key={temuan.id} className="text-balance">
+                  <tr
+                    key={temuan.id}
+                    className="text-nowrap even:bg-slate-100 hover:bg-slate-100"
+                  >
                     <td className="px-4 py-2">{idx + 1}</td>
                     <td className="px-4 py-2">{temuan.nama}</td>
                     <td className="px-4 py-2">{temuan.status}</td>
@@ -123,20 +126,22 @@ const FindingTable = () => {
                       {new Date(temuan.waktu).toLocaleDateString()}
                     </td>
                     <td className="px-4 py-2">{temuan.statusAkhir}</td>
-                    <td className="py-10 flex">
-                      <button
-                        onClick={() => handleEdit(temuan)}
-                        className="text-green-500 p-2 hover:text-green-700 transition duration-200"
-                      >
-                        <FontAwesomeIcon icon={faPen} />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(temuan.id)}
-                        className="text-red-500 p-2 hover:text-red-700 transition duration-200"
-                      >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </td>
+                    {isAdmin && (
+                      <td className="py-10 flex">
+                        <button
+                          onClick={() => handleEdit(temuan)}
+                          className="text-green-500 p-2 hover:text-green-700 transition duration-200"
+                        >
+                          <FontAwesomeIcon icon={faPen} />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(temuan.id)}
+                          className="text-red-500 p-2 hover:text-red-700 transition duration-200"
+                        >
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    )}
                   </tr>
                 ))
               )}

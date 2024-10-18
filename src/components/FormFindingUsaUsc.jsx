@@ -81,7 +81,7 @@ const FormFindingUsaUsc = ({ onClose, mutate, isEdit, initialData }) => {
           `${process.env.REACT_APP_API_URL}/usaTemuan/${initialData.id}`,
           formData
         );
-        toast.success("Data USA Temuan berhasil diperbarui!", {
+        toast.success("Data Finding berhasil diperbarui!", {
           position: "top-right",
         });
       } else {
@@ -89,7 +89,7 @@ const FormFindingUsaUsc = ({ onClose, mutate, isEdit, initialData }) => {
           `${process.env.REACT_APP_API_URL}/usaTemuan`,
           formData
         );
-        toast.success("Data USA Temuan berhasil dibuat!", {
+        toast.success("Data Finding berhasil dibuat!", {
           position: "top-right",
         });
       }
