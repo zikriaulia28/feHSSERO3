@@ -333,7 +333,9 @@ const Home = () => {
       <div className="grid md:grid-cols-2 md:gap-20 mb-8">
         {/* total user */}
         <div className="px-4 md:px-10 py-8 rounded-lg shadow-lg">
-          <h2 className="font-bold mb-4 text-2xl">Jumlah User Terdaftar</h2>
+          <h2 className="font-bold mb-4 text-xl md:text-2xl">
+            Jumlah User Terdaftar
+          </h2>
           <div className="flex items-center justify-between">
             <div className="font-bold text-xl">{userData?.length}</div>
             <FontAwesomeIcon className="text-red-500 text-3xl" icon={faUser} />
@@ -342,7 +344,7 @@ const Home = () => {
 
         {/* total Kendaraan */}
         <div className="px-4 md:px-10 py-8 rounded-lg shadow-lg">
-          <h2 className="font-bold mb-4 text-2xl">
+          <h2 className="font-bold mb-4 text-xl md:text-2xl">
             Jumlah Kendaraan Terdaftar
           </h2>
           <div className="flex items-center justify-between">
@@ -356,7 +358,7 @@ const Home = () => {
 
         {/* total user */}
         <div className="px-4 md:px-10 py-8 rounded-lg shadow-lg">
-          <h2 className="font-bold mb-4 text-2xl">
+          <h2 className="font-bold mb-4 text-xl md:text-2xl">
             Pengguna Menunggu Persetujuan
           </h2>
           <div className="flex items-center justify-between">
@@ -370,7 +372,9 @@ const Home = () => {
 
         {/* total user */}
         <div className="px-4 md:px-10 py-8 rounded-lg shadow-lg">
-          <h2 className="font-bold mb-4 text-2xl">Penggunaan Disetujui</h2>
+          <h2 className="font-bold mb-4 text-xl md:text-2xl">
+            Penggunaan Disetujui
+          </h2>
           <div className="flex items-center justify-between">
             <div className="font-bold text-xl">{totalCompletedPermits}</div>
             <FontAwesomeIcon
