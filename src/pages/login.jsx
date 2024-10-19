@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -11,10 +10,13 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // State untuk menandakan loading
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Aktifkan loading saat tombol diklik
+
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/users/login`,
@@ -30,8 +32,8 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         Cookies.set("token", data.token); // Simpan token di cookies
-        Cookies.set("name", data.user.name); // Simpan token di cookies
-        Cookies.set("role", data.user.role); // Simpan token di cookies
+        Cookies.set("name", data.user.name); // Simpan nama di cookies
+        Cookies.set("role", data.user.role); // Simpan role di cookies
 
         toast.success("Login berhasil!", { position: "top-right" });
         navigate("/"); // Arahkan ke halaman utama setelah login
@@ -42,6 +44,8 @@ const Login = () => {
     } catch (error) {
       console.error("Error:", error);
       toast.error("Terjadi kesalahan saat login", { position: "top-right" });
+    } finally {
+      setIsLoading(false); // Matikan loading setelah proses selesai
     }
   };
 
@@ -56,7 +60,6 @@ const Login = () => {
       }}
     >
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        {/* <img src={logo} alt="Logo" className="mb-4 w-24 mx-auto" /> */}
         <h2 className="mb-6 text-2xl font-bold text-center text-gray-700">
           Selamat Datang!
         </h2>
@@ -89,14 +92,40 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 transition duration-200"
+            className={`w-full px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 transition duration-200 ${
+              isLoading ? "cursor-not-allowed" : ""
+            }`}
+            disabled={isLoading} // Disable tombol saat loading
           >
-            Login
+            {isLoading ? (
+              <div className="flex items-center justify-center">
+                <svg
+                  className="w-5 h-5 mr-3 text-white animate-spin"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8l-4 4a8 8 0 01-4-4z"
+                  ></path>
+                </svg>
+                Logging in...
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
-        {/* <p className="mt-4 text-center text-gray-600">
-          Belum punya akun? <a href="/register" className="text-blue-600 hover:underline">Daftar di sini</a>
-        </p> */}
       </div>
     </div>
   );

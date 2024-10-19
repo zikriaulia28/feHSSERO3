@@ -22,15 +22,13 @@ const UsaOrUsc = () => {
       titlePage="Finding USA(Unsafe Action) And USC(Unsafe Codition)"
       isLogedin={true}
     >
-      {isAdmin && (
-        <button
-          onClick={handleOpenModal}
-          className="w-fit flex items-center gap-2 bg-blue-500 mb-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200"
-        >
-          <h2>Add Finding</h2>
-          <FontAwesomeIcon icon={faPlus} />
-        </button>
-      )}
+      <button
+        onClick={handleOpenModal}
+        className="w-fit flex items-center gap-2 bg-blue-500 mb-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200"
+      >
+        <h2>Add Finding</h2>
+        <FontAwesomeIcon icon={faPlus} />
+      </button>
 
       {/* Modal */}
       {isModalOpen && (

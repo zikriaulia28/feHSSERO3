@@ -4,7 +4,7 @@ import PermitDriving from "./pages/permitDriving";
 import Dashboard from "./pages/home";
 import Cars from "./pages/cars";
 import Login from "./pages/login"; // Halaman login
-import Register from "./pages/register"; // Halaman login
+import Register from "./pages/userManagement"; // Halaman login
 import PrivateRoute from "./components/PrivateRoute"; // Import PrivateRoute
 import SafetyRecords from "./pages/SafetyRecords";
 import UsaOrUsc from "./pages/usaOrUsc";

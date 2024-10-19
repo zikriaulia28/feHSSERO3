@@ -15,9 +15,6 @@ const PermitDriving = () => {
   useEffect(() => {
     document.title = "Permit Driving - HSSE TGI RO 3";
   }, []);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [isCloseModalOpen, setIsCloseModalOpen] = useState(false);
-  // const [selectedPermitId, setSelectedPermitId] = useState(null);
   const { permitData, permitError, handleUpdateStatus } = usePermitData();
   const { carData, carError, mutate } = useCarData(); // Fetch car data
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,7 +54,7 @@ const PermitDriving = () => {
           onClick={handleOpenModal}
           className="mt-10 w-fit flex items-center gap-2 bg-blue-500 mb-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200"
         >
-          <h2>Add Data Cars</h2>
+          <h2>Add Data Car</h2>
           <FontAwesomeIcon icon={faPlus} />
         </button>
       )}

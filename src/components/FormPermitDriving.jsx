@@ -1,40 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const FormPermitDriving = ({ onClose, mutate }) => {
+const FormPermitDriving = ({ onClose, mutate, availableCars, permitData }) => {
   const [formData, setFormData] = useState({
-    date: '',
-    namaPengemudi: '',
-    carId: '',
-    tujuan: '',
-    barangBawaan: '',
-    pemohon: '',
-    pemberiIzin: '',
-    petugasSecurity: '',
-    kmAwal: '',
-    status: 'waiting',
-    jamKeluar: '',
-    fuelLevel: '',
+    date: "",
+    namaPengemudi: "",
+    carId: "",
+    tujuan: "",
+    barangBawaan: "",
+    pemohon: "",
+    pemberiIzin: "",
+    petugasSecurity: "",
+    kmAwal: "",
+    status: "waiting",
+    jamKeluar: "",
+    fuelLevel: "",
   });
 
-  console.log(formData)
+  const [isLoading, setIsLoading] = useState(false); // Tambahkan state untuk loading
 
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    // Fetch available cars
-    const fetchCars = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/cars`);
-        setCars(response.data);
-      } catch (error) {
-        console.error('Error fetching cars:', error);
-      }
-    };
+    // Cek jika carId berubah, ambil kmAkhir dari permit terakhir mobil tersebut
+    if (formData.carId) {
+      const permitForSelectedCar = permitData
+        .filter((permit) => permit.carId === parseInt(formData.carId)) // filter permit berdasarkan carId
+        .sort((a, b) => new Date(b.date) - new Date(a.date)); // urutkan permit berdasarkan tanggal
 
-    fetchCars();
-  }, []);
+      // Jika ada permit sebelumnya untuk mobil yang dipilih, gunakan kmAkhir dari permit terakhir
+      if (permitForSelectedCar.length > 0) {
+        const lastPermit = permitForSelectedCar[0]; // permit terakhir untuk mobil
+        setFormData((prevData) => ({
+          ...prevData,
+          kmAwal: lastPermit.kmAkhir || "", // isi kmAwal dengan kmAkhir permit terakhir
+        }));
+      } else {
+        setFormData((prevData) => ({
+          ...prevData,
+          kmAwal: "", // kosongkan jika tidak ada permit sebelumnya
+        }));
+      }
+    }
+  }, [formData.carId, permitData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,27 +55,41 @@ const FormPermitDriving = ({ onClose, mutate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Set loading state ke true saat tombol submit diklik
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/permitDriving`, formData);
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/permitDriving`,
+        formData
+      );
       mutate();
       onClose(); // Close modal after submitting
-      toast.success('Permit Kendaraan berhasil dibuat!', {
-        position: 'top-right', // Gunakan string untuk posisi
+      toast.success("Permit Kendaraan berhasil dibuat!", {
+        position: "top-right",
       });
     } catch (error) {
-      console.error('Error adding data:', error);
-      toast.error('Gagal membuat Permit Kendaraan. Silakan coba lagi.', {
-        position: 'top-right', // Gunakan string untuk posisi
+      console.error("Error adding data:", error);
+      toast.error("Gagal membuat Permit Kendaraan. Silakan coba lagi.", {
+        position: "top-right",
       });
+    } finally {
+      setIsLoading(false); // Set loading state ke false setelah request selesai
     }
   };
 
-  const pemberiIzinOptions = ["Yudi Yandri", "Deden Darwin", "Junaidi", "Indra Wijaya", "Rudi Indra"];
+  const pemberiIzinOptions = [
+    "Yudi Yandri",
+    "Deden Darwin",
+    "Junaidi",
+    "Indra Wijaya",
+    "Rudi Indra",
+  ];
   const fuelLevelOptions = ["E", "1/4", "1/2", "3/4", "F"];
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className='text-center text-xl font-bold'>Izin Penggunaan Kendaraan</div>
+      <div className="text-center text-xl font-bold">
+        Izin Penggunaan Kendaraan
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input
           type="date"
@@ -93,7 +116,7 @@ const FormPermitDriving = ({ onClose, mutate }) => {
           required
         >
           <option value="">Pilih Mobil</option>
-          {cars.map((car) => (
+          {availableCars.map((car) => (
             <option key={car.id} value={car.id}>
               {car.model} - {car.nopol}
             </option>
@@ -134,7 +157,9 @@ const FormPermitDriving = ({ onClose, mutate }) => {
         >
           <option value="">Pilih Approval</option>
           {pemberiIzinOptions.map((option, index) => (
-            <option key={index} value={option}>{option}</option>
+            <option key={index} value={option}>
+              {option}
+            </option>
           ))}
         </select>
         <input
@@ -164,7 +189,9 @@ const FormPermitDriving = ({ onClose, mutate }) => {
         >
           <option value="">Fuel Level</option>
           {fuelLevelOptions.map((option, index) => (
-            <option key={index} value={option}>{option}</option>
+            <option key={index} value={option}>
+              {option}
+            </option>
           ))}
         </select>
         <input
@@ -188,8 +215,35 @@ const FormPermitDriving = ({ onClose, mutate }) => {
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition duration-200"
+          disabled={isLoading} // Disable button when loading
         >
-          Kirim
+          {isLoading ? (
+            <div className="flex items-center">
+              <svg
+                className="w-5 h-5 mr-2 text-white animate-spin"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v8l-4 4a8 8 0 01-4-4z"
+                ></path>
+              </svg>
+              Loading...
+            </div>
+          ) : (
+            "Kirim"
+          )}
         </button>
       </div>
     </form>

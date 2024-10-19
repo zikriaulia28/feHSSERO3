@@ -39,7 +39,7 @@ const PtwTable = ({ ptwList, setEditData, mutate }) => {
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div>
       <table className="min-w-full divide-y divide-gray-200 table-auto">
         <thead className="bg-gray-50">
           <tr>

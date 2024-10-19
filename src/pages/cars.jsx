@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useCarData from "../hooks/useCarData"; // Assuming you have a hook for fetching car data
-import CarTable from "../components/CarsTable";
+import CarTable from "../components/UserTable";
 import FormCar from "../components/FormCar"; // Assuming you have a form component for adding cars
 import Modal from "../components/Modal";
 import MainLayout from "../components/MainLayout";

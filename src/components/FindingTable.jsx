@@ -79,7 +79,7 @@ const FindingTable = ({ isAdmin }) => {
                 <th className="px-4 py-2">Foto Closing</th>
                 <th className="px-4 py-2">Waktu</th>
                 <th className="px-4 py-2">Status Akhir</th>
-                {isAdmin && <th className="px-4 py-2">Aksi</th>}
+                <th className="px-4 py-2">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -126,22 +126,20 @@ const FindingTable = ({ isAdmin }) => {
                       {new Date(temuan.waktu).toLocaleDateString()}
                     </td>
                     <td className="px-4 py-2">{temuan.statusAkhir}</td>
-                    {isAdmin && (
-                      <td className="py-10 flex">
-                        <button
-                          onClick={() => handleEdit(temuan)}
-                          className="text-green-500 p-2 hover:text-green-700 transition duration-200"
-                        >
-                          <FontAwesomeIcon icon={faPen} />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(temuan.id)}
-                          className="text-red-500 p-2 hover:text-red-700 transition duration-200"
-                        >
-                          <FontAwesomeIcon icon={faTrash} />
-                        </button>
-                      </td>
-                    )}
+                    <td className="py-10 flex">
+                      <button
+                        onClick={() => handleEdit(temuan)}
+                        className="text-green-500 p-2 hover:text-green-700 transition duration-200"
+                      >
+                        <FontAwesomeIcon icon={faPen} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(temuan.id)}
+                        className="text-red-500 p-2 hover:text-red-700 transition duration-200"
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </td>
                   </tr>
                 ))
               )}
